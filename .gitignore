@@ -1,0 +1,10 @@
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+### PROJECT ###
+package-lock.json
+node_modules
+dist
