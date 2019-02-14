@@ -5,19 +5,19 @@ import App from './App.jsx'
 
 const root = document.getElementById("root")
 const render = Component => {
-    ReactDOM.hydrate(
-        <div>
-            <AppContainer>
-                <Component/>
-            </AppContainer>
-        </div>,
-        root
-    )
+  ReactDOM.hydrate(
+    <div>
+      <AppContainer>
+        <Component/>
+      </AppContainer>
+    </div>,
+    root
+  )
 }
 render(App)
 if (module.hot) {
-    module.hot.accept('./App.jsx', () => {
-        const NextApp = require('./App.jsx').default
-        render(NextApp)
-    })
+  module.hot.accept('./App.jsx', () => {
+    const NextApp = require('./App.jsx').default
+    render(NextApp)
+  })
 }
