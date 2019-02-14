@@ -1,36 +1,16 @@
 const path = require('path')
 const webpack = require('webpack')
+const webpackMerge = require('webpack-merge')
+const baseConfig = require('./webpack.base')
 const HTMLPlugin = require('html-webpack-plugin')
 
 const isDev = process.env.NODE_ENV === 'development'
-const config = {
-  mode: "production",
+const config = webpackMerge(baseConfig, {
   entry: {
     app: path.join(__dirname, '../client/app.js')
   },
   output: {
-    filename: '[name].[hash].js',
-    path: path.join(__dirname, '../dist'),
-    publicPath: '/public/'
-  },
-  module: {
-    rules: [{
-      enforce: "pre",
-      test: /.(js|jsx)$/,
-      loader: "eslint-loader",
-      exclude: [
-        path.resolve(__dirname, '../node_modules')
-      ]
-    }, {
-      test: /.jsx$/,
-      loader: "babel-loader"
-    }, {
-      test: /.js$/,
-      loader: "babel-loader",
-      exclude: [
-        path.join(__dirname, '../node_modules')
-      ]
-    },]
+    filename: '[name].[hash].js'
   },
   plugins: [
     new HTMLPlugin({
@@ -38,7 +18,7 @@ const config = {
     })
   ]
 
-}
+})
 if (isDev) {
   config.mode = 'development'
   config.entry = {
@@ -53,7 +33,7 @@ if (isDev) {
     contentBase: path.join(__dirname, '../dist'),
     hot: true,
     overlay: {
-      errors: true//错误信息 黑框
+      errors: true // 错误信息 黑框
     },
     publicPath: '/public/',
     historyApiFallback: {
