@@ -1,5 +1,7 @@
 const path = require('path')
-module.exports = {
+const isDev = process.env.NODE_ENV === 'development'
+config= {
+    mode: "production",
     target: "node",
     entry: {
         app: path.join(__dirname, '../client/server-entry.js')
@@ -7,7 +9,7 @@ module.exports = {
     output: {
         filename: 'server-entry.js',
         path: path.join(__dirname, '../dist'),
-        publicPath: '',
+        publicPath: '/public/',
         libraryTarget: "commonjs2"
     },
     module: {
@@ -24,3 +26,7 @@ module.exports = {
     }
 
 }
+if (isDev) {
+    config.mode='development'
+}
+module.exports = config
