@@ -14,9 +14,21 @@ class Login extends React.Component {
     this.changeName = this.changeName.bind(this)
   }
 
+
   componentDidMount() {
 
   }
+
+  asyncBootstrap() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        this.props.appState.counter = 3
+        this.props.appState.name = '王五'
+        resolve(true)
+      })
+    })
+  }
+
 
   changeName(ev) {
     this.props.appState.changeName(ev.target.value)

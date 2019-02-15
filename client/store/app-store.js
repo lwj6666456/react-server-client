@@ -1,14 +1,21 @@
 import {
   observable,
   computed,
-  autorun,
   action,
 } from 'mobx'
 
 export default class AppState {
-  @observable counter = 0
+  constructor({ counter, name } = {
+    counter: 0,
+    name: '张三',
+  }) {
+    this.counter = counter
+    this.name = name
+  }
 
-  @observable name = '张三'
+  @observable counter
+
+  @observable name
 
   @computed get msg() {
     return `${this.name} 说 ${this.counter}`
@@ -21,14 +28,11 @@ export default class AppState {
   @action changeName(name) {
     this.name = name
   }
+
+  toJson() {
+    return {
+      counter: this.counter,
+      name: this.name,
+    }
+  }
 }
-
-const appState = new AppState()
-
-autorun(() => {
-  console.log(appState.msg)
-})
-
-setInterval(() => {
-  appState.add()
-}, 1000)

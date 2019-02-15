@@ -6,6 +6,7 @@ const config = webpackMerge(baseConfig, {
   entry: {
     app: path.join(__dirname, '../client/server-entry.js')
   },
+  externals: Object.keys(require('../package.json').dependencies), // 不包含外部类库代码
   output: {
     filename: 'server-entry.js',
     libraryTarget: 'commonjs2'
