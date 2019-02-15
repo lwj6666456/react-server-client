@@ -6,6 +6,9 @@ const config = {
     path: path.join(__dirname, '../dist'),
     publicPath: '/public/'
   },
+  resolve: {
+    extensions: ['.jsx', '.js']
+  },
   module: {
     rules: [{
       enforce: 'pre',
